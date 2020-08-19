@@ -3,6 +3,7 @@
 
  let limit: number = 4000000
 
+ 
  function findEvenTermSum ( prevNumber1: number, prevNumber2: number, sum: number ) : number {   
     let nextNumber: number = prevNumber1 + prevNumber2 
     if ( nextNumber >= limit ) {
@@ -13,6 +14,7 @@
     }
     return findEvenTermSum ( prevNumber2, nextNumber, sum )
  }
+
 
  let evenTermSum: number = findEvenTermSum ( 1, 2, 2 ) 
  console.log ( evenTermSum )
