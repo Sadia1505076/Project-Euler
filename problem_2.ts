@@ -28,8 +28,9 @@
     return findEvenTermSum (prevNumber2, nextNumber, sum)
  }
 
+
  console.time()
  let evenTermSum: number = findEvenTermSum (1, 2, 2) // answer is 4613732
  console.timeEnd()
-
- console.log ( evenTermSum )
+ // default: 0.195ms
+ console.log ("Sum of even valued terms in fibonacci series is: ", evenTermSum )
