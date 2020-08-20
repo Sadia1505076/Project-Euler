@@ -12,25 +12,45 @@
 
 */
 
-
- let limit: number = 4000000
-
  
- function findEvenTermSum (prevNumber1: number, prevNumber2: number, sum: number) : number { 
+ let nextNumber:      number
+ let limit:           number = 4000000
+ let fibonacciSeries: Array<number> = []
 
-    let nextNumber: number = prevNumber1 + prevNumber2 
+
+ function generateFibonacciSeries (prevNumber1: number, prevNumber2: number) : number { 
+
+    nextNumber = prevNumber1 + prevNumber2 
     if (nextNumber >= limit) {
-        return sum
+        return -1
     }
-    else if (nextNumber % 2 == 0) {
-        sum += nextNumber
-    }
-    return findEvenTermSum (prevNumber2, nextNumber, sum)
+    fibonacciSeries.push(nextNumber)
+    return generateFibonacciSeries (prevNumber2, nextNumber)
+ }
+
+
+ function isEvenNumber (givenNumber: number) : boolean {
+    if (givenNumber % 2 == 0) return true
+    return false
+ }
+
+
+ function findTwoNumberSum (number1: number, number2: number) : number {
+     return number1 + number2
+ }
+
+
+ function findEvenValuedSum () : number {
+    fibonacciSeries.push(1)
+    fibonacciSeries.push(2)
+    generateFibonacciSeries (1, 2)
+    let evenValuedSum: number = fibonacciSeries.filter(isEvenNumber).reduce(findTwoNumberSum)
+    return evenValuedSum
  }
 
 
  console.time()
- let evenTermSum: number = findEvenTermSum (1, 2, 2) // answer is 4613732
+ let evenTermSum: number = findEvenValuedSum () // answer is 4613732
  console.timeEnd()
- // default: 0.195ms
+ // default: 0.535ms
  console.log ("Sum of even valued terms in fibonacci series is: ", evenTermSum )
