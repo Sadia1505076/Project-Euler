@@ -9,31 +9,45 @@
 
 */ 
 
+function isPrimeNumber (givenNumber: number) : boolean {
 
-function findLargestFactor (givenNumber: number) : number {   
+    for (let i: number = 2 ; i < Math.sqrt(givenNumber) ; i++) {
 
-    let largestPrimeFactor: number = 0
-    let isPrime:            boolean
- 
-    for (let i: number = 2 ; i < givenNumber ; i++) {
+        if (givenNumber % i == 0) return false
 
-        if (givenNumber % i == 0) {
-
-            isPrime = true
-            for (let j: number = 2 ; j <= Math.sqrt(i) ; j++) {
-
-                if (i % j == 0) {
-                    isPrime = false
-                    break
-                } 
-            } 
-            if (isPrime == true && i > largestPrimeFactor) largestPrimeFactor = i
-        }
     }
-    return largestPrimeFactor
+
+    return true
 }
 
 
-let givenNumber:        number = 600851475143  
-let largestPrimeFactor: number = findLargestFactor (givenNumber) 
-console.log (largestPrimeFactor)
+function findLargestPrimeFactor (givenNumber: number) : number {   
+
+    let primeFactors:           Array<number> = []
+    let portionLeftToFactorize: number = givenNumber
+    
+    for (let i: number = 2 ; i < portionLeftToFactorize ; i++) {
+
+        if (isPrimeNumber(portionLeftToFactorize)) {
+            primeFactors.push(portionLeftToFactorize)
+            break
+        }
+
+        if (portionLeftToFactorize % i == 0 && isPrimeNumber(i)) {
+            primeFactors.push(i)
+            portionLeftToFactorize /= i
+            i = 1
+        }
+
+    }
+
+    return Math.max(...primeFactors)
+}
+
+
+let givenNumber: number = 600851475143  
+console.time()  
+let largestPrimeFactor: number = findLargestPrimeFactor (givenNumber) 
+console.timeEnd()
+// default: 62.175ms
+console.log ("The largest prime factor of ", givenNumber, " is: ", largestPrimeFactor) // Answer is 6857
