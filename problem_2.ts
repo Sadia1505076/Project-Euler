@@ -19,13 +19,12 @@
 
 
  function generateFibonacciSeries (prevNumber1: number, prevNumber2: number) : number { 
-
     nextNumber = prevNumber1 + prevNumber2 
     if (nextNumber >= limit) {
         return -1
     }
     fibonacciSeries.push(nextNumber)
-    return generateFibonacciSeries (prevNumber2, nextNumber)
+    return generateFibonacciSeries(prevNumber2, nextNumber)
  }
 
 
@@ -35,22 +34,22 @@
  }
 
 
- function findTwoNumberSum (number1: number, number2: number) : number {
+ function addTwoNumber (number1: number, number2: number) : number {
      return number1 + number2
  }
 
 
- function findEvenValuedSum () : number {
+ function addEvenValue () : number {
     fibonacciSeries.push(1)
     fibonacciSeries.push(2)
     generateFibonacciSeries (1, 2)
-    let evenValuedSum: number = fibonacciSeries.filter(isEvenNumber).reduce(findTwoNumberSum)
+    let evenValuedSum: number = fibonacciSeries.filter(isEvenNumber).reduce(addTwoNumber)
     return evenValuedSum
  }
 
 
  console.time()
- let evenTermSum: number = findEvenValuedSum () // answer is 4613732
+ let evenTermSum: number = addEvenValue() // answer is 4613732
  console.timeEnd()
  // default: 0.535ms
  console.log ("Sum of even valued terms in fibonacci series is: ", evenTermSum )
