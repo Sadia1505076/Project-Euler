@@ -10,23 +10,23 @@
 */
 
 
-function findMultipleSum() : number {
-    let sum: number = 0
-    for (let i: number = 3 ; i < 1000 ; i++) {
+function calculateSumOfMultiple3Or5() : number {
+    let sumOfMultiple: number = 0;
+    for (let i: number = 1; i < 1000; i++) {
         if (i % 3 == 0 || i % 5 == 0) {
-            sum += i
+            sumOfMultiple += i;
         }
     }
-    return sum
+    return sumOfMultiple;
 }
 
 
 // let t0                  = performance.now()
-console.time()
-let multipleSum: number = findMultipleSum()
-console.timeEnd()
+console.time("time");
+let sumOfMultiple: number = calculateSumOfMultiple3Or5();
+console.timeEnd("time");
 // let t1                  = performance.now()
 // default 0.251ms
 
-console.log("Sum of multiple of 3 or 5 below 1000 is: ", multipleSum) // Answer is 233168
+console.log("Sum of multiple of 3 or 5 below 1000 is: ", sumOfMultiple); // Answer is 233168
 // console.log("Call to the function took " + (t1 - t0) + " milliseconds.")
