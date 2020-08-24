@@ -11,33 +11,32 @@
 */
 
 
-let allPalindromeNumber: Array<number> = [];
+let palindromeNumbers: Array<number> = [];
 
-function isPalindrome (givenNumber: number) : boolean {
-    let stringFormedNumber: string = givenNumber.toString(10);
+function isPalindrome (input: number) : boolean {
+    let stringFormedNumber: string = input.toString(10);
     let reversedString:     string = stringFormedNumber.split('').reverse().join("");
     
     if (stringFormedNumber != reversedString) return false; 
     return true;
 }
 
-function findLargestPalindrome () : number {
-    let largestPalindrome: number;
-
-    for (let i: number = 100; i <= 999; i++){
-        for (let j: number = i + 1; j <= 999; j++){
-            let palindromeNumber: number = i * j; 
-            if (isPalindrome (palindromeNumber)) {
-                allPalindromeNumber.push(palindromeNumber);}
+function findLargestPalindrome (lowerBound: number, upperBound: number) : number {
+    for (let i: number = lowerBound; i <= upperBound; i++){
+        for (let j: number = i; j <= upperBound; j++){
+            let potentialPalindrome: number = i * j; 
+            if (isPalindrome (potentialPalindrome)) {
+                palindromeNumbers.push(potentialPalindrome);
+            }
         }
     }
 
-    return Math.max(...allPalindromeNumber)
+    return Math.max(...palindromeNumbers)
 }
 
 
 console.time("time");
-let largestPalindrome: number = findLargestPalindrome();
+let largestPalindrome: number = findLargestPalindrome(100, 999);
 console.timeEnd("time");
 //time: 288.390ms
 console.log("Largest palindromic number made from the product of two 3-digit numbers is: ", largestPalindrome); 
