@@ -49,23 +49,20 @@ console.log (evenTermSum);
     return generateFibonacciSeries(prevNumber2, nextNumber);
  }
 
-
- function isEvenNumber (givenNumber: number) : boolean {
+ function isEven (givenNumber: number) : boolean {
     if (givenNumber % 2 == 0) return true;
     return false;
  }
 
-
- function calculateTwoNumberSum (number1: number, number2: number) : number {
+ function performSummation (number1: number, number2: number) : number {
      return number1 + number2;
  }
-
 
  function calculateEvenValuedSum () : number {
     fibonacciSeries.push(1);
     fibonacciSeries.push(2);
     generateFibonacciSeries(1, 2);
-    let evenValuedSum: number = fibonacciSeries.filter(isEvenNumber).reduce(calculateTwoNumberSum);
+    let evenValuedSum: number = fibonacciSeries.filter(isEven).reduce(performSummation);
     return evenValuedSum;
  }
 
