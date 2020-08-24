@@ -10,41 +10,30 @@
 */ 
 
 
-function isPrimeNumber (givenNumber: number) : boolean {
-    for (let i: number = 2; i < Math.sqrt(givenNumber); i++) {
-        if (givenNumber % i == 0) return false;
-
+function isPrime (input: number) : boolean {
+    for (let i: number = 2; i < Math.sqrt(input); i++) {
+        if (input % i == 0) return false;
     }
 
     return true;
 }
 
-
-function findLargestPrimeFactor (givenNumber: number) : number {   
-    let primeFactors:           Array<number> = [];
-    let portionLeftToFactorize: number = givenNumber;
+function findLargestPrimeFactor (numToPrimeFactorize: number) : number {   
+    let primeFactors: Array<number> = [];
     
-    for (let i: number = 2; i < Math.sqrt(portionLeftToFactorize); i++) {
-        if (isPrimeNumber(portionLeftToFactorize)) {
-            primeFactors.push(portionLeftToFactorize);
-            break;
-        }
-
-        if (portionLeftToFactorize % i == 0 && isPrimeNumber(i)) {
+    for (let i: number = 2; i < Math.sqrt(numToPrimeFactorize); i++) {
+        if (numToPrimeFactorize % i == 0 && isPrime(i)) {
             primeFactors.push(i);
-            portionLeftToFactorize /= i;
-            i = 1;
         }
-
     }
 
     return Math.max(...primeFactors);
 }
 
 
-let givenNumber: number = 600851475143;  
+let input: number = 600851475143;  
 console.time("time");  
-let largestPrimeFactor: number = findLargestPrimeFactor (givenNumber); 
+let largestPrimeFactor: number = findLargestPrimeFactor (input); 
 console.timeEnd("time");
-// time: 38.094ms
-console.log ("The largest prime factor of ", givenNumber, " is: ", largestPrimeFactor); // Answer is 6857
+// time: 17.716ms
+console.log ("The largest prime factor of ", input, " is: ", largestPrimeFactor); // Answer is 6857
