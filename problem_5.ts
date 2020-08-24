@@ -10,6 +10,7 @@
 */
 
 
+/*
 function isDivisible (givenNumber: number, divisibleUpto: number) : boolean {
     for (let i: number = 1; i <= divisibleUpto; i++) {
         if (givenNumber % i != 0) return false;
@@ -33,11 +34,28 @@ function findSmallestMultiple (divisibleUpto: number) : number {
     return 0;
 }
 
+*/
 
-let divisibleUpto: number = 20
+
+function calculateGcd (input1: number, input2: number) : number {
+    if (input2 == 0) return input1;
+    return calculateGcd (input2, input1 % input2);
+}
+
+function calculateSmallestMultiple (divisibleUpto: number) : number {
+    let smallestMultiple: number = 1;
+    for (let i: number = 2; i <= divisibleUpto; i++) {
+        smallestMultiple = (smallestMultiple * i) / calculateGcd (smallestMultiple, i);
+    }
+
+    return smallestMultiple;
+} 
+
+
+let divisibleUpto: number = 20;
 console.time("time");
-let smallestMultiple: number = findSmallestMultiple (divisibleUpto);
+let smallestMultiple: number = calculateSmallestMultiple (divisibleUpto);
 console.timeEnd("time");
-// time: 3394.120ms
+// time: 0.140ms
 console.log("The smallest positive number that is evenly divisible by all of the numbers from 1 to 20 is: ", smallestMultiple);
 // Answer is 232792560
