@@ -11,25 +11,25 @@
 
 
 /*
-function isDivisible (givenNumber: number, divisibleUpto: number) : boolean {
+function isDivisible (input: number, divisibleUpto: number) : boolean {
     for (let i: number = 1; i <= divisibleUpto; i++) {
-        if (givenNumber % i != 0) return false;
+        if (input % i != 0) return false;
     }
     return true;
 }
 
-function calculateRangeToFindMultiple (divisibleUpto: number) : number {
-    let rangeToFindMultiple: number = 1;
+function calculateUpperBoundForMultiple (divisibleUpto: number) : number {
+    let upperBound: number = 1;
     for (let i: number = 1; i <= divisibleUpto; i++) {
-        rangeToFindMultiple *= i;
+        upperBound *= i;
     }
-    return rangeToFindMultiple;
+    return upperBound;
 }
 
-function findSmallestMultiple (divisibleUpto: number) : number {
-    let rangeToFindMultiple: number = calculateRangeToFindMultiple (divisibleUpto);
-    for (let i: number = 1; i <= rangeToFindMultiple; i++) {
-        if (isDivisible (i, divisibleUpto) == true) return i; 
+function calculateSmallestMultiple (divisibleUpto: number) : number {
+    let upperBound: number = calculateUpperBoundForMultiple (divisibleUpto);
+    for (let i: number = 1; i <= upperBound; i++) {
+        if (isDivisible (i, divisibleUpto)) return i; 
     }
     return 0;
 }
@@ -45,7 +45,9 @@ function calculateGcd (input1: number, input2: number) : number {
 function calculateSmallestMultiple (divisibleUpto: number) : number {
     let smallestMultiple: number = 1;
     for (let i: number = 2; i <= divisibleUpto; i++) {
-        smallestMultiple = (smallestMultiple * i) / calculateGcd (smallestMultiple, i);
+        let product: number = smallestMultiple * i;
+        let gcd:     number = calculateGcd (smallestMultiple, i);
+        smallestMultiple    = product / gcd;
     }
 
     return smallestMultiple;
