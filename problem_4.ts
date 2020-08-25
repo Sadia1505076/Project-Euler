@@ -13,18 +13,26 @@
 
 let palindromeNumbers: Array<number> = [];
 
-function isPalindromeWithoutString (input: number) : boolean {
-    let reversedDigits:   Array<number> = [];
-    let quotient:         number = input;
+function isPalindromeNotUsingString (input: number) : boolean {
+    // let reversedDigits:   Array<number> = [];
+    let reversedInput: number = 0;
+    let quotient:      number = input;
+    let remainder:     number;
 
     while (quotient != 0) {
-        reversedDigits.push (quotient % 10);
+        // reversedDigits.push (quotient % 10);
+        remainder = quotient % 10;
+        reversedInput = reversedInput * 10 + remainder;
         quotient = Math.floor(quotient / 10);
     }
 
+    /*
     let digits: Array<number> = [];
     digits = digits.concat(reversedDigits).reverse();
     return digits.every((val, index) => val == reversedDigits[index]);
+    */
+    
+    return input == reversedInput;    
 }
 
 function isPalindrome (input: number) : boolean {
@@ -37,10 +45,9 @@ function isPalindrome (input: number) : boolean {
 function deriveLargestPalindromeFromProduct (lowerBound: number, upperBound: number) : number {
     for (let i: number = lowerBound; i <= upperBound; i++){
         for (let j: number = i; j <= upperBound; j++){
-            let potentialPalindrome: number = i * j; 
-            if (potentialPalindrome < 100000) continue;
-            if (isPalindromeWithoutString (potentialPalindrome)) {
-                palindromeNumbers.push(potentialPalindrome);
+            let multiple: number = i * j; 
+            if (multiple > 100000 && isPalindromeNotUsingString (multiple)) {
+                palindromeNumbers.push(multiple);
             }
         }
     }
@@ -57,5 +64,6 @@ console.timeEnd("time");
 //previous time without optimization: 288.390ms
 // without string, time: 116.302ms
 // with string , time: 173.503ms
+// without array, time: 45.653ms
 console.log("Largest palindromic number made from the product of two 3-digit numbers is: ", largestPalindrome); 
 // Answer is 906609
