@@ -32,7 +32,7 @@
 */
 
 
-function calculatingLargestProduct (input:string, adjacentDigitLength: number) : number {
+function calculateLargestProduct (input:string, adjacentDigitLength: number) : number {
     let greatestProduct: number = 1;
     let multiple:        number;
     input = input.replace (/\s+/g, ""); // removing white space from the string.
@@ -73,7 +73,7 @@ let input:           string = ` 731671765313306249192251196744265747423553491949
                                 05886116467109405077541002256983155200055935729725
                                 71636269561882670428252483600823257530420752963450 `;
 console.time("time");
-let greatestProduct: number = calculatingLargestProduct (input, adjacentDigitLength);
+let greatestProduct: number = calculateLargestProduct (input, adjacentDigitLength);
 console.timeEnd("time");
 console.log("The greatest product of thirteen adjucent digit is: ", greatestProduct);
 
