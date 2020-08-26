@@ -16,30 +16,31 @@
 */
 
 
-function calculateSumOfSquares (upperBound: number) : number {
-    let product:      number = upperBound * (upperBound + 1) * (2 * upperBound + 1);
+function calculateSumOfSquares (n: number) : number {
+    let product:      number = n * (n + 1) * (2 * n + 1);
     let sumOfSquares: number = product / 6;
     return sumOfSquares;
 }
 
-function calculateSquareOfSum (upperBound: number) : number {
-    let product:          number = upperBound * (upperBound + 1);
+function calculateSquareOfSum (n: number) : number {
+    let product:          number = n * (n + 1);
     let naturalNumberSum: number = product / 2;
     let squareOfSum:      number = Math.pow (naturalNumberSum, 2);
     return squareOfSum;
 }
 
-function sumSquareAndSquareSumDifference (upperBound: number) : number {
-    let sumOfSquares: number = calculateSumOfSquares (upperBound);
-    let squareOfSum:  number = calculateSquareOfSum (upperBound);
+function subtractSumSquareSquareSum (n: number) : number {
+    let sumOfSquares: number = calculateSumOfSquares (n);
+    let squareOfSum:  number = calculateSquareOfSum (n);
     return squareOfSum - sumOfSquares;
 }
 
 
 let upperBound: number = 100;
 console.time("time");
-let difference: number = sumSquareAndSquareSumDifference (upperBound);
+let difference: number = subtractSumSquareSquareSum (upperBound);
 console.timeEnd("time");
-//time: 0.422ms
 console.log("the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum is: ", difference);
-// answer is 25164150
+
+// Time:   0.422ms
+// Answer: 25164150
