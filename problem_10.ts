@@ -20,26 +20,22 @@ function isPrime (input: number) : boolean {
 function calculateSummationOfPrimes (upperBound: number) : number {
     let summationOfPrimes:  number = 5;
     let n:                  number = 1;
-    let possiblePrime:      number;                  
+    let possiblePrime1:      number;
+    let possiblePrime2:      number;                   
 
     while (true) {
-        possiblePrime = 6 * n - 1;
-        if (possiblePrime > upperBound) break;
-        if (isPrime (possiblePrime)) {
-            summationOfPrimes += possiblePrime;
+        possiblePrime1 = 6 * n - 1;
+        possiblePrime2 = 6 * n + 1;
+        if (possiblePrime1 > upperBound && possiblePrime2 > upperBound) break;
+        if (isPrime (possiblePrime1) && possiblePrime1 < upperBound) {
+            summationOfPrimes += possiblePrime1;
+        }
+        if (isPrime (possiblePrime2) && possiblePrime2 < upperBound) {
+            summationOfPrimes += possiblePrime2;
         }
         n++;
     }
 
-    n = 1;
-    while (true) {
-        possiblePrime = 6 * n + 1;
-        if (possiblePrime > upperBound) break;
-        if (isPrime (possiblePrime)) {
-            summationOfPrimes += possiblePrime;
-        }
-        n++;
-    }
     return summationOfPrimes;
 }
 
@@ -48,7 +44,7 @@ let upperBound: number = 2000000;
 console.time("time");
 let summationOfPrimes: number = calculateSummationOfPrimes (upperBound);
 console.timeEnd("time");
-console.log("The 10001st prime number is: ", summationOfPrimes);
+console.log("The sum of all the primes below two million is: ", summationOfPrimes);
 
-// Time:       1013.249ms
+// Time:       1002.377ms
 // Answer:     142913828922
