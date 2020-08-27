@@ -13,21 +13,21 @@
 
 */
 
+function calculateSquare (input: number) : number {
+    return Math.pow(input, 2);
+}
 
-function calculateProductOfPythagoreanTriplet (input: number) : number {
-    let sideSum:        number;
+function calculateProductOfPythagoreanTriplet () : number {
     let pythagoreanSum: number;
+    let c:              number;
 
-    for (let a: number = 1; a < 333; a++) {
-        for (let b: number = a + 1; b < 499; b++) {
-            for (let c: number = b + 1; c < 997; c++) {
-                sideSum = a + b + c;
-                pythagoreanSum = Math.pow(a, 2) + Math.pow(b, 2);
-
-                if (sideSum == input && pythagoreanSum == Math.pow(c, 2)) {
+    for (let a: number = 1; a < sideSum / 2; a++) {
+        for (let b: number = a + 1; b < (sideSum - 1) / 2; b++) {
+                c = 1000 - a - b;
+                pythagoreanSum = calculateSquare (a) + calculateSquare (b);
+                if (pythagoreanSum == calculateSquare (c)) {
                     return a * b * c;
                 }
-            }
         }
     }
     return 0;
@@ -36,9 +36,9 @@ function calculateProductOfPythagoreanTriplet (input: number) : number {
 
 let sideSum: number = 1000;
 console.time("time");
-let productOfPythagoreanTriplet: number = calculateProductOfPythagoreanTriplet (sideSum);
+let productOfPythagoreanTriplet: number = calculateProductOfPythagoreanTriplet ();
 console.timeEnd("time");
-console.log("The prodict of pythagorean triptelt is: ", productOfPythagoreanTriplet);
+console.log("The product of pythagorean triptelt is: ", productOfPythagoreanTriplet);
 
 // Time:       311.260ms
 // Answer:     31875000
