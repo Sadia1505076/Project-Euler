@@ -50,7 +50,7 @@ function calcHighlyDivisibleTriangularNo (minDivisors: number) : number {
 }
 
 
-let minDivisors: number = 500;
+let minDivisors: number = 100;
 console.time("time");
 let highlyDivisibleTriangularNo: number = calcHighlyDivisibleTriangularNo (minDivisors);
 console.timeEnd("time");
