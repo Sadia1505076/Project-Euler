@@ -25,11 +25,9 @@
 
 function calcTotalDivisors (input: number) : number {
     let totalDivisors: number = 0;
-    // console.log("for:", input);
-    for (let i: number = 2; i <= input / 2; i++) {
+    for (let i: number = 2; i <= Math.sqrt(input); i++) {
         if (input % i == 0) {
-            // console.log(i);
-            totalDivisors += 1;
+            totalDivisors += 2;
         }
     }
     return totalDivisors + 2;
@@ -43,18 +41,17 @@ function calcHighlyDivisibleTriangularNo (minDivisors: number) : number {
     while (totalDivisorsOfNo <= minDivisors) {
         nextTriangularNo += iteration;        
         totalDivisorsOfNo = calcTotalDivisors (nextTriangularNo);
-        console.log(nextTriangularNo, totalDivisorsOfNo);
         iteration++;
     }
     return nextTriangularNo;
 }
 
 
-let minDivisors: number = 100;
+let minDivisors: number = 500;
 console.time("time");
 let highlyDivisibleTriangularNo: number = calcHighlyDivisibleTriangularNo (minDivisors);
 console.timeEnd("time");
 console.log("The value of the first triangle number to have over five hundred divisors is: ", highlyDivisibleTriangularNo);
 
-// Time:       311.260ms
-// Answer:     31875000
+// Time:       500.135ms
+// Answer:     76576500
