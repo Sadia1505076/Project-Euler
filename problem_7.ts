@@ -24,7 +24,7 @@ function calculateNthPrime (n: number) : number {
     let countPrime: number = 2;
     let iteration:  number = 1;
     let nthprime:   number;
-    let a:          number; // I didn't know how to name a and b.
+    let a:          number; 
     let b:          number;
     let isAPrime:   boolean;
     let isBPrime:   boolean;
