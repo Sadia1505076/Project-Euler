@@ -29,7 +29,7 @@ function calculateSquareOfSum (n: number) : number {
     return squareOfSum;
 }
 
-function subtractSumSquareSquareSum (n: number) : number {
+function calcSumSquareAndSquareSumDifference (n: number) : number {
     let sumOfSquares: number = calculateSumOfSquares (n);
     let squareOfSum:  number = calculateSquareOfSum (n);
     return squareOfSum - sumOfSquares;
@@ -38,7 +38,7 @@ function subtractSumSquareSquareSum (n: number) : number {
 
 let upperBound: number = 100;
 console.time("time");
-let difference: number = subtractSumSquareSquareSum (upperBound);
+let difference: number = calcSumSquareAndSquareSumDifference (upperBound);
 console.timeEnd("time");
 console.log("the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum is: ", difference);
 
