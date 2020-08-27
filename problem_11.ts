@@ -37,60 +37,65 @@
 function calculateLargestProductInGrid (grid: string, adjacentDigitLength: number) : number {
     let gridSplittedByRow: string[];
     let twoDGrid:          Array<Array<string>> = [];
-    let product:       number;
+    let product:           number;
     let greatestProduct:   number = 0;
 
     gridSplittedByRow = grid.split("\n");   
     gridSplittedByRow.forEach(function(row) {
         twoDGrid.push(row.trim().split(" ")); // splitting each row to separate every column.
     });
-    // console.log(twoDGrid);
     
     let dimension: number = twoDGrid.length;
+
     // for calculating up/down product
-    console.log("up")
     for (let column: number = 0; column < dimension; column++) {
         for (let row:number = 0; row <= dimension - adjacentDigitLength; row++) {
             product = 1;
             for (let i:number = 0; i < adjacentDigitLength; i++) {
                 product *= +twoDGrid[row + i][column];
             }
-            // console.log(product)
             if (product > greatestProduct) {
-                console.log("greatest, p: ", greatestProduct, product);
                 greatestProduct = product;
             }
         }
     }
 
     // for calculating left/right product
-    console.log("right")
     for (let row: number = 0; row < dimension; row++) {
         for (let column:number = 0; column <= dimension - adjacentDigitLength; column++) {
             product = 1;
             for (let i:number = 0; i < adjacentDigitLength; i++) {
                 product *= +twoDGrid[row][column + i];
             }
-            // console.log(product)
             if (product > greatestProduct) {
-                console.log("greatest, p: ", greatestProduct, product);
                 greatestProduct = product;
             }
         }
     }
 
     // for calculating diagonal product
-    console.log("diagonal")
     for (let row: number = 0; row < dimension; row++) {
         for (let column: number = 0; column < dimension; column++) {
-            if (row + adjacentDigitLength -1 >= dimension || column + adjacentDigitLength -1 >= dimension) break;
+            if (row + adjacentDigitLength - 1 >= dimension || column + adjacentDigitLength - 1 >= dimension) break;
             product = 1;
             for (let i: number = 0; i < adjacentDigitLength; i++) {
                 product *= +twoDGrid[row + i][column + i];
             }
-            // console.log(product)
             if (product > greatestProduct) {
-                console.log("greatest, p: ", greatestProduct, product);
+                greatestProduct = product;
+            }
+        }
+    }
+
+    // for calculating another diagonal product
+    for (let row: number = dimension - 1; row >= 0; row--) {
+        for (let column: number = 0; column < dimension; column++) {
+            if (row - adjacentDigitLength + 1 < 0 || column + adjacentDigitLength -1 >= dimension) break;
+            product = 1;
+            for (let i: number = 0; i < adjacentDigitLength; i++) {
+                product *= +twoDGrid[row - i][column + i];
+            }
+            if (product > greatestProduct) {
                 greatestProduct = product;
             }
         }
@@ -101,11 +106,6 @@ function calculateLargestProductInGrid (grid: string, adjacentDigitLength: numbe
 
 
 let adjacentDigitLength: number = 4;
-// let grid: string = `1 2 3 4 6
-//                     9 3 2 5 1
-//                     0 1 2 4 5
-//                     6 7 8 9 8
-//                     11 2 3 7 6`;
 let grid:                string = `08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
                                     49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
                                     81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
@@ -132,5 +132,5 @@ let largestProductInGrid: number = calculateLargestProductInGrid (grid, adjacent
 console.timeEnd("time");
 console.log("The largest product in grid is: ", largestProductInGrid);
 
-// Time:       311.260ms
-// Answer:     31875000
+// Time:       1.230ms
+// Answer:     70600674
