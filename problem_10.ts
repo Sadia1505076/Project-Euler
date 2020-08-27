@@ -17,11 +17,11 @@ function isPrime (input: number) : boolean {
     return true;
 }
 
-function calculateSummationOfPrimes (upperBound: number) : number {
+function calculateSumOfPrimesBelowN (upperBound: number) : number {
     let summationOfPrimes:  number = 5;
     let n:                  number = 1;
-    let possiblePrime1:      number;
-    let possiblePrime2:      number;                   
+    let possiblePrime1:     number;
+    let possiblePrime2:     number;                   
 
     while (true) {
         possiblePrime1 = 6 * n - 1;
@@ -42,7 +42,7 @@ function calculateSummationOfPrimes (upperBound: number) : number {
 
 let upperBound: number = 2000000;
 console.time("time");
-let summationOfPrimes: number = calculateSummationOfPrimes (upperBound);
+let summationOfPrimes: number = calculateSumOfPrimesBelowN (upperBound);
 console.timeEnd("time");
 console.log("The sum of all the primes below two million is: ", summationOfPrimes);
 
