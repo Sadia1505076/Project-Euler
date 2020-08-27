@@ -18,15 +18,21 @@ function isPrime (input: number) : boolean {
     return true;
 }
 
-function calculateLargestPrimeFactor (input: number) : number {   
+function calculateLargestPrimeFactor (portionLeftToFactorize: number) : number {    
     let primeFactors: Array<number> = [];
-    
-    for (let i: number = 2; i < Math.sqrt(input); i++) {
-        if (input % i == 0 && isPrime(i)) {
-            primeFactors.push(i);
+    for (let i: number = 2 ; i < portionLeftToFactorize ; i++) {
+        if (isPrime(portionLeftToFactorize)) {
+            primeFactors.push(portionLeftToFactorize);
+            break;
         }
-    }
 
+        if (portionLeftToFactorize % i == 0 && isPrime(i)) {
+            primeFactors.push(i);
+            portionLeftToFactorize /= i;
+            i = 1;
+        }
+
+    }
     return Math.max(...primeFactors);
 }
 
@@ -35,5 +41,5 @@ let input: number = 600851475143;
 console.time("time");  
 let largestPrimeFactor: number = calculateLargestPrimeFactor (input); 
 console.timeEnd("time");
-// time: 17.716ms
+// time: 39.085ms
 console.log ("The largest prime factor of ", input, " is: ", largestPrimeFactor); // Answer is 6857
