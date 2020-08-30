@@ -35,24 +35,24 @@
 
 
 function calculateLargestProductInGrid (grid: string, adjacentDigitLength: number) : number {
-    let gridSplittedByRow: string[];
-    let twoDGrid:          Array<Array<string>> = [];
-    let product:           number;
-    let greatestProduct:   number = 0;
+    let gridSplittedByRow:           string[];
+    let twoDimentionalGrid:          Array<Array<string>> = [];
+    let product:                     number;
+    let greatestProduct:             number = 0;
 
     gridSplittedByRow = grid.split("\n");   
     gridSplittedByRow.forEach(function(row) {
-        twoDGrid.push(row.trim().split(" ")); // splitting each row to separate every column.
+        twoDimentionalGrid.push(row.trim().split(" ")); // splitting each row to separate every column.
     });
     
-    let dimension: number = twoDGrid.length;
+    let dimension: number = twoDimentionalGrid.length;
 
     // for calculating up/down product
     for (let column: number = 0; column < dimension; column++) {
         for (let row:number = 0; row <= dimension - adjacentDigitLength; row++) {
             product = 1;
             for (let i:number = 0; i < adjacentDigitLength; i++) {
-                product *= +twoDGrid[row + i][column];
+                product *= +twoDimentionalGrid[row + i][column];
             }
             if (product > greatestProduct) {
                 greatestProduct = product;
@@ -65,7 +65,7 @@ function calculateLargestProductInGrid (grid: string, adjacentDigitLength: numbe
         for (let column:number = 0; column <= dimension - adjacentDigitLength; column++) {
             product = 1;
             for (let i:number = 0; i < adjacentDigitLength; i++) {
-                product *= +twoDGrid[row][column + i];
+                product *= +twoDimentionalGrid[row][column + i];
             }
             if (product > greatestProduct) {
                 greatestProduct = product;
@@ -73,13 +73,13 @@ function calculateLargestProductInGrid (grid: string, adjacentDigitLength: numbe
         }
     }
 
-    // for calculating diagonal product
+    // for calculating diagonal product, left to right
     for (let row: number = 0; row < dimension; row++) {
         for (let column: number = 0; column < dimension; column++) {
             if (row + adjacentDigitLength - 1 >= dimension || column + adjacentDigitLength - 1 >= dimension) break;
             product = 1;
             for (let i: number = 0; i < adjacentDigitLength; i++) {
-                product *= +twoDGrid[row + i][column + i];
+                product *= +twoDimentionalGrid[row + i][column + i];
             }
             if (product > greatestProduct) {
                 greatestProduct = product;
@@ -87,13 +87,13 @@ function calculateLargestProductInGrid (grid: string, adjacentDigitLength: numbe
         }
     }
 
-    // for calculating another diagonal product
+    // for calculating another diagonal product, right to left
     for (let row: number = dimension - 1; row >= 0; row--) {
         for (let column: number = 0; column < dimension; column++) {
             if (row - adjacentDigitLength + 1 < 0 || column + adjacentDigitLength -1 >= dimension) break;
             product = 1;
             for (let i: number = 0; i < adjacentDigitLength; i++) {
-                product *= +twoDGrid[row - i][column + i];
+                product *= +twoDimentionalGrid[row - i][column + i];
             }
             if (product > greatestProduct) {
                 greatestProduct = product;
