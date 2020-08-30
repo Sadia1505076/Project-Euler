@@ -23,6 +23,15 @@
 */
 
 
+function isPrime (input: number) : boolean {
+    for (let i: number = 2; i <= Math.sqrt(input); i++) {
+        if (input % i == 0) return false;
+    }
+
+    return true;
+}
+
+// only the perfect squares of prime numbers have odd number of factors. 1, itself and the prime number.
 function calcTotalDivisors (input: number) : number {
     let totalDivisors: number = 0;
     for (let i: number = 2; i <= Math.sqrt(input); i++) {
@@ -30,17 +39,21 @@ function calcTotalDivisors (input: number) : number {
             totalDivisors += 2;
         }
     }
+    if (isPrime (Math.sqrt(input))) {
+        totalDivisors --;
+    }
     return totalDivisors + 2;
 }
 
 function calcHighlyDivisibleTriangularNo (minDivisors: number) : number {
-    let nextTriangularNo:  number = 1;
-    let totalDivisorsOfNo: number = 1;
-    let iteration:         number = 2;   
+    let nextTriangularNo:            number = 1;
+    let totalDivisorsOfTriangularNo: number = 1;
+    let iteration:                   number = 2;   
     
-    while (totalDivisorsOfNo <= minDivisors) {
-        nextTriangularNo += iteration;        
-        totalDivisorsOfNo = calcTotalDivisors (nextTriangularNo);
+    while (totalDivisorsOfTriangularNo <= minDivisors) {
+        nextTriangularNo += iteration;  
+        // nextTriangularNo = iteration * (iteration + 1) / 2;    // Takes about  644.798ms.
+        totalDivisorsOfTriangularNo = calcTotalDivisors (nextTriangularNo);
         iteration++;
     }
     return nextTriangularNo;
@@ -49,9 +62,9 @@ function calcHighlyDivisibleTriangularNo (minDivisors: number) : number {
 
 let minDivisors: number = 500;
 console.time("time");
-let highlyDivisibleTriangularNo: number = calcHighlyDivisibleTriangularNo (minDivisors);
+let triangularNoWithOver500Divisors: number = calcHighlyDivisibleTriangularNo (minDivisors);
 console.timeEnd("time");
-console.log("The value of the first triangle number to have over five hundred divisors is: ", highlyDivisibleTriangularNo);
+console.log("The value of the first triangle number to have over five hundred divisors is: ", triangularNoWithOver500Divisors);
 
 // Time:       500.135ms
 // Answer:     76576500
