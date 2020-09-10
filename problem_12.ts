@@ -50,7 +50,7 @@ function calcHighlyDivisibleTriangularNo (minDivisors: number) : number {
     let totalDivisorsOfTriangularNo: number = 1;
     let iteration:                   number = 2;   
     
-    while (totalDivisorsOfTriangularNo <= minDivisors) {
+    while (totalDivisorsOfTriangularNo < minDivisors) {
         nextTriangularNo += iteration;  
         // nextTriangularNo = iteration * (iteration + 1) / 2;    // Takes about  644.798ms.
         totalDivisorsOfTriangularNo = calcTotalDivisors (nextTriangularNo);
