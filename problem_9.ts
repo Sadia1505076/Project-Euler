@@ -27,7 +27,7 @@ function calculateProductOfPythagoreanTriplet () : number {
         for (let b: number = a + 1; b < (sideSum - 1) / 2; b++) {
                 c = 1000 - a - b;
                 rightSideSum = calculateSquare (c);
-                leftSideSum = calculateSquare (a) + calculateSquare (b);
+                leftSideSum  = calculateSquare (a) + calculateSquare (b);
                 if (leftSideSum == rightSideSum) {
                     return a * b * c;
                 }
