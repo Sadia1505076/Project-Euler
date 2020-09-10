@@ -18,14 +18,12 @@ function isPrime (input: number) : boolean {
 }
 
 function calculateSumOfPrimesBelowN (upperBound: number) : number {
-    let summationOfPrimes:  number = 5;
-    let n:                  number = 1;
-    let possiblePrime1:     number;
-    let possiblePrime2:     number;                   
+    let summationOfPrimes: number = 5;
+    let n:                 number = 1;                 
 
     while (true) {
-        possiblePrime1 = 6 * n - 1;
-        possiblePrime2 = 6 * n + 1;
+        let possiblePrime1: number = 6 * n - 1;
+        let possiblePrime2: number = 6 * n + 1;
         if (possiblePrime1 > upperBound && possiblePrime2 > upperBound) break;
         if (isPrime (possiblePrime1) && possiblePrime1 < upperBound) {
             summationOfPrimes += possiblePrime1;
