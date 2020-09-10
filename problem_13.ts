@@ -109,34 +109,34 @@
 */ 
 
 
-function first10DigitsOfLargeSum (allNumbers: string) : string {
-    let eachNumberSeparatedInRow: string[];
-    let digitsSeparated:          Array<Array<string>> = [];
-    let totalNumbers:             number;
-    let largeSum:                 Array<string> = [];
-    let iteration:                number;
-    let carryOut:                 number = 0;
-    let sum:                      number = 0;
-    let remainder:                number;
+function calcFirst10DigitsOfLargeSum (allNumbers: string) : string {
+    let numberSeparatedInRow: string[];
+    let separatedDigits:      Array<Array<string>> = [];
+    let totalNumbers:         number;
+    let largeSum:             Array<string> = [];
+    let totalDigits:          number;
+    let carryOut:             number = 0;
+    let sum:                  number = 0;
+    let remainder:            number;
 
-    eachNumberSeparatedInRow = allNumbers.split("\n");   
-    eachNumberSeparatedInRow.forEach(function(row) {
-        digitsSeparated.push(row.trim().split("")); // splitting each row to separate every digit.
+    numberSeparatedInRow = allNumbers.split("\n");   
+    numberSeparatedInRow.forEach(function(row) {
+        separatedDigits.push(row.trim().split("")); // splitting each row to separate every digit.
     });
 
-    iteration = digitsSeparated[0].length - 1;
-    totalNumbers = digitsSeparated.length;
+    totalDigits = separatedDigits[0].length - 1;
+    totalNumbers = separatedDigits.length;
     
-    while (iteration >= 0) {
+    while (totalDigits >= 0) {
         for (let i: number = 0; i < totalNumbers; i++) {
-            sum += +digitsSeparated[i][iteration];
+            sum += +separatedDigits[i][totalDigits];
         }
         
         remainder = (sum + carryOut) % 10;
         largeSum.push (remainder.toString());
         carryOut = Math.floor((sum + carryOut) / 10);
         sum = 0;
-        iteration --;
+        totalDigits --;
     }
 
     let splittedCarryOut: string[] = carryOut.toString().split(""); 
@@ -255,9 +255,9 @@ let all50DigitNumbers: string = `37107287533902102798797998220837590246510135740
                                 53503534226472524250874054075591789781264330331690`;
 
 console.time("time");  
-let first10digits: string = first10DigitsOfLargeSum (all50DigitNumbers);
+let first10DigitsOfLargeSum: string = calcFirst10DigitsOfLargeSum (all50DigitNumbers);
 console.timeEnd("time"); 
-console.log("The first 10 digits of large sum is: ", first10digits);
+console.log("The first 10 digits of large sum is: ", first10DigitsOfLargeSum);
 
 // Time:   1.127ms
 // Answer: 5537376230
